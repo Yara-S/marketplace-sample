@@ -15,14 +15,21 @@ import ButtonPrimary from '@/shared/Button/ButtonPrimary';
 import ButtonSecondary from '@/shared/Button/ButtonSecondary';
 import InputNumber from '@/shared/InputNumber/InputNumber';
 
-import LikeButton from './LikeButton';
-
 export interface CartSideBarProps {}
 const CartSideBar: React.FC<CartSideBarProps> = () => {
   const [isVisable, setIsVisable] = useState(false);
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  const [cartShoes, setCartShoes] = useState(shoes.slice(0, 5));
+
+  // setCartShoes(shoes.slice(0, 2));
 
   const handleOpenMenu = () => setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
+  const handleDeleteItem = () => {
+    // const newCart = cartShoes.filter((shoe) => shoe.shoeName !== item.shoeName);
+    shoes.pop();
+    setCartShoes(shoes);
+  };
 
   const renderProduct = (item: ProductType) => {
     const { shoeName, coverImage, currentPrice, slug, rating, shoeCategory } =
@@ -66,8 +73,9 @@ const CartSideBar: React.FC<CartSideBarProps> = () => {
           </div>
           <div className="flex w-full items-end justify-between text-sm">
             <div className="flex items-center gap-3">
-              <LikeButton />
-              <AiOutlineDelete className="text-2xl" />
+              <ButtonCircle3 onClick={handleDeleteItem}>
+                <AiOutlineDelete className="text-2xl" />
+              </ButtonCircle3>
             </div>
             <div>
               <InputNumber />
@@ -107,7 +115,7 @@ const CartSideBar: React.FC<CartSideBarProps> = () => {
                         </ButtonCircle3>
                       </div>
                       <div className="divide-y divide-neutral-300">
-                        {shoes.slice(0, 2).map((item) => renderProduct(item))}
+                        {cartShoes.map((item) => renderProduct(item))}
                       </div>
                     </div>
                     <div className="absolute bottom-0 left-0 w-full bg-neutral-50 p-5">

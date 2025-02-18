@@ -5,8 +5,6 @@ import React from 'react';
 
 import type { ProductType } from '@/data/types';
 
-import LikeButton from './LikeButton';
-
 interface ProductCardProps {
   product: ProductType;
   className?: string;
@@ -28,7 +26,6 @@ const ProductCard: FC<ProductCardProps> = ({
             Just In!
           </div>
         )}
-        <LikeButton className="absolute right-2 top-2" />
         <Link
           className="h-[250px] w-full lg:h-[220px]"
           href={`/products/${product.slug}`}
