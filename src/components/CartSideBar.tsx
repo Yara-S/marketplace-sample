@@ -8,27 +8,27 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { FaBagShopping } from 'react-icons/fa6';
 import { MdClose, MdStar } from 'react-icons/md';
 
-import { shoes } from '@/data/content';
+// import { PageContext } from '@/app/layout';
+// import { shoes } from '@/data/content';
 import type { ProductType } from '@/data/types';
+// import { useGetCart } from '@/hooks/useCountDownTime';
 import ButtonCircle3 from '@/shared/Button/ButtonCircle3';
 import ButtonPrimary from '@/shared/Button/ButtonPrimary';
 import ButtonSecondary from '@/shared/Button/ButtonSecondary';
 import InputNumber from '@/shared/InputNumber/InputNumber';
 
-export interface CartSideBarProps {}
-const CartSideBar: React.FC<CartSideBarProps> = () => {
+export interface CartSideBarProps {
+  cart: ProductType[];
+  deleteItemCart: any;
+}
+const CartSideBar: React.FC<CartSideBarProps> = ({ cart, deleteItemCart }) => {
   const [isVisable, setIsVisable] = useState(false);
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  const [cartShoes, setCartShoes] = useState(shoes.slice(0, 5));
-
-  // setCartShoes(shoes.slice(0, 2));
 
   const handleOpenMenu = () => setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
-  const handleDeleteItem = () => {
-    // const newCart = cartShoes.filter((shoe) => shoe.shoeName !== item.shoeName);
-    shoes.pop();
-    setCartShoes(shoes);
+  const handleDeleteItem = (chosenItem: ProductType) => {
+    setIsVisable(false);
+    deleteItemCart(chosenItem);
   };
 
   const renderProduct = (item: ProductType) => {
@@ -73,7 +73,7 @@ const CartSideBar: React.FC<CartSideBarProps> = () => {
           </div>
           <div className="flex w-full items-end justify-between text-sm">
             <div className="flex items-center gap-3">
-              <ButtonCircle3 onClick={handleDeleteItem}>
+              <ButtonCircle3 onClick={() => handleDeleteItem(item)}>
                 <AiOutlineDelete className="text-2xl" />
               </ButtonCircle3>
             </div>
@@ -115,7 +115,7 @@ const CartSideBar: React.FC<CartSideBarProps> = () => {
                         </ButtonCircle3>
                       </div>
                       <div className="divide-y divide-neutral-300">
-                        {cartShoes.map((item) => renderProduct(item))}
+                        {cart?.map((item: any) => renderProduct(item))}
                       </div>
                     </div>
                     <div className="absolute bottom-0 left-0 w-full bg-neutral-50 p-5">
@@ -175,7 +175,7 @@ const CartSideBar: React.FC<CartSideBarProps> = () => {
         className="mx-5 flex items-center gap-1 rounded-full bg-neutral-100 p-2 text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         <FaBagShopping className="text-2xl" />
-        <span className="hidden text-sm lg:block">3 items</span>
+        <span className="hidden text-sm lg:block">{cart?.length} items</span>
       </button>
 
       {renderContent()}

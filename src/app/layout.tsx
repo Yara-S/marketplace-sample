@@ -1,52 +1,53 @@
+/* eslint-disable no-param-reassign */
+
+'use client';
+
 import '@/styles/global.css';
 
-import type { Metadata } from 'next';
-import React, { Suspense } from 'react';
+// import type { Metadata } from 'next';
+import React, { Suspense, useState } from 'react';
 
 import Header from '@/components/Header/Header';
+import type { ProductType } from '@/data/types';
+import airForce1 from '@/images/airForce1.webp';
 import Footer from '@/shared/Footer/Footer';
 
 import Loading from './loading';
 
-export const metadata: Metadata = {
-  title: 'Hotkicks Ecommerce Template',
-  icons: [
-    {
-      rel: 'apple-touch-icon',
-      url: '/apple-touch-icon.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      url: '/favicon.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      url: '/favicon.png',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon.ico',
-    },
-  ],
-};
+const emptyCart: ProductType[] = [];
+export const PageContext = React.createContext(emptyCart);
 
 export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [cart, setCart] = useState([
+    {
+      slug: 'airForce1',
+      shoeName: 'Air Force 1',
+      coverImage: airForce1,
+      currentPrice: 199,
+      previousPrice: 250,
+      shoeCategory: "Men's shoes",
+      rating: 4.8,
+      reviews: 56,
+      pieces_sold: 600,
+      justIn: false,
+    },
+  ]);
+
+  const deleteItemCart = (item: ProductType) => {
+    setCart(cart.filter((product) => product.slug !== item.slug));
+  };
   return (
     <html lang="en">
       <body className="">
-        <Header />
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-        <Footer />
+        <PageContext.Provider value={cart}>
+          <Header cart={cart} deleteItemCart={deleteItemCart} />
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+          <Footer />
+        </PageContext.Provider>
       </body>
     </html>
   );

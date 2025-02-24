@@ -2,7 +2,7 @@
 
 - Fix cart functionality
 - Configure request handler for content
-- Fix cart deleted item
+- ~~Fix cart deleted item~~
 - Fix cart subtotal
 - Change checkout option
 - Fix subscribe button

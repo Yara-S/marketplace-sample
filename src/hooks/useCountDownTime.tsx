@@ -2,6 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
+// import { PiPercentFill } from 'react-icons/pi';
+import type { ProductType } from '@/data/types';
+// import shot1 from '@/images/shots/shot1.webp';
+
 const calculateTimeLeft = () => {
   const year = new Date().getFullYear();
   const month = new Date().getMonth();
@@ -42,6 +46,11 @@ const useCountDownTime = () => {
   });
 
   return timeLeft;
+};
+
+export const useGetCart = () => {
+  const [cart, setCart] = useState<ProductType[]>([]);
+  return { cart, setCart };
 };
 
 export default useCountDownTime;
