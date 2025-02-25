@@ -10,6 +10,7 @@ export type ProductType = {
   rating: number;
   pieces_sold: number;
   justIn: boolean;
+  count?: number;
 };
 
 export type BlogData = {

@@ -13,11 +13,13 @@ import { PiSealCheckFill } from 'react-icons/pi';
 import ImageShowCase from '@/components/ImageShowCase';
 import ShoeSizeButton from '@/components/ShoeSizeButton';
 import { shoeSizes } from '@/data/content';
+import type { ProductType } from '@/data/types';
 import nike_profile from '@/images/nike_profile.jpg';
 import ButtonCircle3 from '@/shared/Button/ButtonCircle3';
-import ButtonPrimary from '@/shared/Button/ButtonPrimary';
 import ButtonSecondary from '@/shared/Button/ButtonSecondary';
 import Heading from '@/shared/Heading/Heading';
+
+import { PageContext } from '../../layout';
 
 interface SectionProductHeaderProps {
   shots: StaticImageData[];
@@ -27,6 +29,7 @@ interface SectionProductHeaderProps {
   rating: number;
   pieces_sold: number;
   reviews: number;
+  cartItem: ProductType;
 }
 
 const SectionProductHeader: FC<SectionProductHeaderProps> = ({
@@ -37,7 +40,17 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
   rating,
   pieces_sold,
   reviews,
+  cartItem,
 }) => {
+  const cartContext = React.useContext(PageContext);
+  if (cartContext === undefined) {
+    throw new Error('Cart not defined');
+  }
+  const { addItemCart } = cartContext;
+
+  const handleAddItemCart = (item: ProductType) => {
+    addItemCart(item);
+  };
   return (
     <div className="items-stretch justify-between space-y-10 lg:flex lg:space-y-0">
       <div className="basis-[50%]">
@@ -58,7 +71,7 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
               <Image
                 src={nike_profile}
                 alt="nike_profile"
-                className="h-full w-full object-cover"
+                className="size-full object-cover"
               />
             </ButtonCircle3>
             <span className="font-medium">Nike</span>
@@ -95,8 +108,10 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
         </div>
 
         <div className="mt-5 flex items-center gap-5">
-          <ButtonPrimary className="w-full">Buy Now</ButtonPrimary>
-          <ButtonSecondary className="flex w-full items-center gap-1 border-2 border-primary text-primary">
+          <ButtonSecondary
+            className="flex w-full items-center gap-1 border-2 border-primary text-primary"
+            onClick={() => handleAddItemCart(cartItem)}
+          >
             <BsBag /> Add to cart
           </ButtonSecondary>
         </div>

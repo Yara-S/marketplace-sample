@@ -1,9 +1,11 @@
+/* eslint-disable no-param-reassign */
+
 'use client';
 
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaBagShopping } from 'react-icons/fa6';
 import { MdClose, MdStar } from 'react-icons/md';
@@ -20,15 +22,41 @@ import InputNumber from '@/shared/InputNumber/InputNumber';
 export interface CartSideBarProps {
   cart: ProductType[];
   deleteItemCart: any;
+  isVisable: boolean;
+  openBar: () => void;
+  closeBar: () => void;
+  setCart: React.Dispatch<React.SetStateAction<ProductType[]>>;
 }
-const CartSideBar: React.FC<CartSideBarProps> = ({ cart, deleteItemCart }) => {
-  const [isVisable, setIsVisable] = useState(false);
+const CartSideBar: React.FC<CartSideBarProps> = ({
+  cart,
+  deleteItemCart,
+  openBar,
+  closeBar,
+  isVisable,
+  setCart,
+}) => {
+  const handleOpenMenu = () => openBar();
+  const handleCloseMenu = () => closeBar();
 
-  const handleOpenMenu = () => setIsVisable(true);
-  const handleCloseMenu = () => setIsVisable(false);
+  const sumSubtotal = () => {
+    let total = 0;
+    for (const item of cart) {
+      total += item.currentPrice;
+    }
+    return total;
+  };
+
   const handleDeleteItem = (chosenItem: ProductType) => {
-    setIsVisable(false);
     deleteItemCart(chosenItem);
+  };
+
+  const handleItemCountUpdate = (item: ProductType, value: any) => {
+    const loc = cart.indexOf(item);
+    if (cart[loc] !== undefined) {
+      cart[loc].count = value;
+      setCart(cart);
+      console.log(cart);
+    }
   };
 
   const renderProduct = (item: ProductType) => {
@@ -37,12 +65,12 @@ const CartSideBar: React.FC<CartSideBarProps> = ({ cart, deleteItemCart }) => {
 
     return (
       <div key={shoeName} className="flex py-5 last:pb-0">
-        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl">
+        <div className="relative size-24 shrink-0 overflow-hidden rounded-xl">
           <Image
             fill
             src={coverImage}
             alt={shoeName}
-            className="h-full w-full object-contain object-center"
+            className="size-full object-contain object-center"
           />
           <Link
             onClick={handleCloseMenu}
@@ -78,7 +106,10 @@ const CartSideBar: React.FC<CartSideBarProps> = ({ cart, deleteItemCart }) => {
               </ButtonCircle3>
             </div>
             <div>
-              <InputNumber />
+              <InputNumber
+                defaultValue={item.count}
+                onChange={(x) => handleItemCountUpdate(item, x)}
+              />
             </div>
           </div>
         </div>
@@ -126,7 +157,9 @@ const CartSideBar: React.FC<CartSideBarProps> = ({ cart, deleteItemCart }) => {
                             Shipping and taxes calculated at checkout.
                           </span>
                         </span>
-                        <span className="text-xl font-medium">$597</span>
+                        <span className="text-xl font-medium">
+                          ${sumSubtotal()}
+                        </span>
                       </p>
                       <div className="mt-5 flex items-center gap-5">
                         <ButtonPrimary
@@ -175,7 +208,7 @@ const CartSideBar: React.FC<CartSideBarProps> = ({ cart, deleteItemCart }) => {
         className="mx-5 flex items-center gap-1 rounded-full bg-neutral-100 p-2 text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         <FaBagShopping className="text-2xl" />
-        <span className="hidden text-sm lg:block">{cart?.length} items</span>
+        <span className="hidden text-sm lg:block">{cart.length} items</span>
       </button>
 
       {renderContent()}

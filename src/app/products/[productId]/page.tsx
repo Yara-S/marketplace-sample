@@ -3,6 +3,7 @@ import { pathOr } from 'ramda';
 import React from 'react';
 
 import { shoes } from '@/data/content';
+import type { ProductType } from '@/data/types';
 
 import SectionMoreProducts from './SectionMoreProducts';
 import SectionNavigation from './SectionNavigation';
@@ -22,6 +23,8 @@ const getProductData = async (id: string) => {
 const SingleProductPage = async (props: Props) => {
   const selectedProduct = await getProductData(props.params.productId);
 
+  const selectedCartItem: ProductType = selectedProduct as ProductType;
+
   return (
     <div className="container">
       <SectionNavigation />
@@ -35,6 +38,7 @@ const SingleProductPage = async (props: Props) => {
           rating={pathOr(0, ['rating'], selectedProduct)}
           pieces_sold={pathOr(0, ['pieces_sold'], selectedProduct)}
           reviews={pathOr(0, ['reviews'], selectedProduct)}
+          cartItem={selectedCartItem}
         />
       </div>
 

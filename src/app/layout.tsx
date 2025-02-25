@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-param-reassign */
 
 'use client';
@@ -9,42 +10,56 @@ import React, { Suspense, useState } from 'react';
 
 import Header from '@/components/Header/Header';
 import type { ProductType } from '@/data/types';
-import airForce1 from '@/images/airForce1.webp';
+// import airForce1 from '@/images/airForce1.webp';
 import Footer from '@/shared/Footer/Footer';
 
 import Loading from './loading';
 
 const emptyCart: ProductType[] = [];
-export const PageContext = React.createContext(emptyCart);
+
+interface CartContextValue {
+  addItemCart: (item: ProductType) => void;
+}
+export const PageContext = React.createContext<CartContextValue | undefined>(
+  undefined,
+);
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [cart, setCart] = useState([
-    {
-      slug: 'airForce1',
-      shoeName: 'Air Force 1',
-      coverImage: airForce1,
-      currentPrice: 199,
-      previousPrice: 250,
-      shoeCategory: "Men's shoes",
-      rating: 4.8,
-      reviews: 56,
-      pieces_sold: 600,
-      justIn: false,
-    },
-  ]);
+  const [cart, setCart] = useState(emptyCart);
+  const [isVisable, setIsVisable] = useState(false);
+
+  const openBar = () => setIsVisable(true);
+  const closeBar = () => setIsVisable(false);
 
   const deleteItemCart = (item: ProductType) => {
     setCart(cart.filter((product) => product.slug !== item.slug));
+    closeBar();
+    openBar();
   };
+
+  const addItemCart = (item: ProductType) => {
+    item.count = 1;
+    cart.push(item);
+    setCart(cart);
+    openBar();
+  };
+
   return (
     <html lang="en">
       <body className="">
-        <PageContext.Provider value={cart}>
-          <Header cart={cart} deleteItemCart={deleteItemCart} />
+        <PageContext.Provider value={{ addItemCart }}>
+          <Header
+            cart={cart}
+            deleteItemCart={deleteItemCart}
+            openBar={openBar}
+            closeBar={closeBar}
+            isVisable={isVisable}
+            setCart={setCart}
+          />
           <Suspense fallback={<Loading />}>{children}</Suspense>
           <Footer />
         </PageContext.Provider>
