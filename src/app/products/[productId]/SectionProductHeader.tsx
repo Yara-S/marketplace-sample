@@ -23,7 +23,7 @@ interface SectionProductHeaderProps {
   prevPrice: number;
   currentPrice: number;
   rating: number;
-  pieces_sold: number;
+  pieces_available: number;
   cartItem: ProductType;
 }
 
@@ -33,7 +33,7 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
   prevPrice,
   currentPrice,
   rating,
-  pieces_sold,
+  pieces_available,
   cartItem,
 }) => {
   const cartContext = React.useContext(PageContext);
@@ -75,7 +75,7 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
             <p className="text-sm">{rating} </p>
           </div>
           <GoDotFill className="mx-3 text-neutral-500" />
-          <p className="text-neutral-500">{`${pieces_sold} items sold`}</p>
+          <p className="text-neutral-500">{`${pieces_available} items available`}</p>
         </div>
 
         <div className="mb-5 space-y-1">

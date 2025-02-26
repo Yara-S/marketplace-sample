@@ -10,7 +10,7 @@
 - Change checkout option
 - Fix subscribe button
 - Fix contact form
-- Fix type shoes
+- ~~Fix type shoes~~
 - Link cart checkout to final function
 - Link request handler to final endpoint
 - Fix overall look

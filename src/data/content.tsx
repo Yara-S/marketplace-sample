@@ -1,10 +1,6 @@
-import { BsBoxFill } from 'react-icons/bs';
-import { FaCalendarAlt } from 'react-icons/fa';
-import { FaTruckFast } from 'react-icons/fa6';
 import { FiBox } from 'react-icons/fi';
 import { IoChatboxOutline } from 'react-icons/io5';
 import { MdOutlineCameraAlt } from 'react-icons/md';
-import { PiPercentFill } from 'react-icons/pi';
 
 import type { NavItemType } from '@/components/NavItem';
 import airForce1 from '@/images/airForce1.webp';
@@ -12,13 +8,8 @@ import blackLebron from '@/images/blackLebron.webp';
 import brownsb from '@/images/brownsb.webp';
 import brsb from '@/images/brsb.webp';
 import dunklow from '@/images/dunklow.webp';
-import shot1 from '@/images/shots/shot1.webp';
-import shot2 from '@/images/shots/shot2.webp';
-import shot3 from '@/images/shots/shot3.jpeg';
-import shot4 from '@/images/shots/shot4.jpeg';
-import shot5 from '@/images/shots/shot5.webp';
-import shot6 from '@/images/shots/shot6.jpeg';
-import shot7 from '@/images/shots/shot7.webp';
+
+import type { ProductType } from './types';
 
 export const topNavLinks: NavItemType[] = [
   {
@@ -43,7 +34,7 @@ export const topNavLinks: NavItemType[] = [
   },
 ];
 
-export const shoes = [
+export const shoes: ProductType[] = [
   {
     slug: 'airForce1',
     shoeName: 'Air Force 1',
@@ -52,34 +43,11 @@ export const shoes = [
     previousPrice: 250,
     shoeCategory: "Men's shoes",
     rating: 4.8,
-    reviews: 56,
-    pieces_sold: 600,
+    pieces_available: 600,
     justIn: false,
-    shots: [airForce1, shot1, shot2, shot3, shot4, shot5, shot6, shot7],
+    shots: [airForce1],
     overview:
       'When your workouts wade into the nitty gritty, the Nike Free Metcon 5 can meet you in the depths, help you dig deep to find that final ounce of force and come out of the other side on a high. It matches style with substance, forefoot flexibility with backend stability, perfect for flying through a cardio day or enhancing your agility. A revamped upper offers easier entry with a collar made just for your ankle.',
-    shipment_details: [
-      {
-        icon: <PiPercentFill className="text-xl text-secondary" />,
-        title: 'Discount',
-        description: '> $100 Disc 10%',
-      },
-      {
-        icon: <FaCalendarAlt className="text-xl text-secondary" />,
-        title: 'Delivery Time',
-        description: '6 - 12 Working days',
-      },
-      {
-        icon: <BsBoxFill className="text-xl text-secondary" />,
-        title: 'Package',
-        description: 'Reagular Premium Box',
-      },
-      {
-        icon: <FaTruckFast className="text-xl text-secondary" />,
-        title: 'Estimated Arrival',
-        description: '10 - 12 October 23',
-      },
-    ],
   },
   {
     slug: 'blackLebron',
@@ -89,34 +57,11 @@ export const shoes = [
     previousPrice: 250,
     shoeCategory: "Men's shoes",
     rating: 4.8,
-    reviews: 56,
-    pieces_sold: 600,
+    pieces_available: 600,
     justIn: true,
-    shots: [blackLebron, shot1, shot2, shot3, shot4, shot5, shot6, shot7],
+    shots: [blackLebron],
     overview:
       'When your workouts wade into the nitty gritty, the Nike Free Metcon 5 can meet you in the depths, help you dig deep to find that final ounce of force and come out of the other side on a high. It matches style with substance, forefoot flexibility with backend stability, perfect for flying through a cardio day or enhancing your agility. A revamped upper offers easier entry with a collar made just for your ankle.',
-    shipment_details: [
-      {
-        icon: <PiPercentFill className="text-xl text-secondary" />,
-        title: 'Discount',
-        description: '> $100 Disc 10%',
-      },
-      {
-        icon: <FaCalendarAlt className="text-xl text-secondary" />,
-        title: 'Delivery Time',
-        description: '6 - 12 Working days',
-      },
-      {
-        icon: <BsBoxFill className="text-xl text-secondary" />,
-        title: 'Package',
-        description: 'Reagular Premium Box',
-      },
-      {
-        icon: <FaTruckFast className="text-xl text-secondary" />,
-        title: 'Estimated Arrival',
-        description: '10 - 12 October 23',
-      },
-    ],
   },
   {
     slug: 'brownsb',
@@ -126,34 +71,11 @@ export const shoes = [
     previousPrice: 250,
     shoeCategory: "Men's shoes",
     rating: 4.8,
-    reviews: 56,
-    pieces_sold: 600,
+    pieces_available: 600,
     justIn: false,
-    shots: [brownsb, shot1, shot2, shot3, shot4, shot5, shot6, shot7],
+    shots: [brownsb],
     overview:
       'When your workouts wade into the nitty gritty, the Nike Free Metcon 5 can meet you in the depths, help you dig deep to find that final ounce of force and come out of the other side on a high. It matches style with substance, forefoot flexibility with backend stability, perfect for flying through a cardio day or enhancing your agility. A revamped upper offers easier entry with a collar made just for your ankle.',
-    shipment_details: [
-      {
-        icon: <PiPercentFill className="text-xl text-secondary" />,
-        title: 'Discount',
-        description: '> $100 Disc 10%',
-      },
-      {
-        icon: <FaCalendarAlt className="text-xl text-secondary" />,
-        title: 'Delivery Time',
-        description: '6 - 12 Working days',
-      },
-      {
-        icon: <BsBoxFill className="text-xl text-secondary" />,
-        title: 'Package',
-        description: 'Reagular Premium Box',
-      },
-      {
-        icon: <FaTruckFast className="text-xl text-secondary" />,
-        title: 'Estimated Arrival',
-        description: '10 - 12 October 23',
-      },
-    ],
   },
   {
     slug: 'brsb',
@@ -163,34 +85,11 @@ export const shoes = [
     previousPrice: 250,
     shoeCategory: "Men's shoes",
     rating: 4.8,
-    reviews: 56,
-    pieces_sold: 600,
+    pieces_available: 600,
     justIn: false,
-    shots: [brsb, shot1, shot2, shot3, shot4, shot5, shot6, shot7],
+    shots: [brsb],
     overview:
       'When your workouts wade into the nitty gritty, the Nike Free Metcon 5 can meet you in the depths, help you dig deep to find that final ounce of force and come out of the other side on a high. It matches style with substance, forefoot flexibility with backend stability, perfect for flying through a cardio day or enhancing your agility. A revamped upper offers easier entry with a collar made just for your ankle.',
-    shipment_details: [
-      {
-        icon: <PiPercentFill className="text-xl text-secondary" />,
-        title: 'Discount',
-        description: '> $100 Disc 10%',
-      },
-      {
-        icon: <FaCalendarAlt className="text-xl text-secondary" />,
-        title: 'Delivery Time',
-        description: '6 - 12 Working days',
-      },
-      {
-        icon: <BsBoxFill className="text-xl text-secondary" />,
-        title: 'Package',
-        description: 'Reagular Premium Box',
-      },
-      {
-        icon: <FaTruckFast className="text-xl text-secondary" />,
-        title: 'Estimated Arrival',
-        description: '10 - 12 October 23',
-      },
-    ],
   },
   {
     slug: 'dunklow',
@@ -200,34 +99,11 @@ export const shoes = [
     previousPrice: 250,
     shoeCategory: "Men's shoes",
     rating: 4.8,
-    reviews: 56,
-    pieces_sold: 600,
+    pieces_available: 600,
     justIn: false,
-    shots: [dunklow, shot1, shot2, shot3, shot4, shot5, shot6, shot7],
+    shots: [dunklow],
     overview:
       'When your workouts wade into the nitty gritty, the Nike Free Metcon 5 can meet you in the depths, help you dig deep to find that final ounce of force and come out of the other side on a high. It matches style with substance, forefoot flexibility with backend stability, perfect for flying through a cardio day or enhancing your agility. A revamped upper offers easier entry with a collar made just for your ankle.',
-    shipment_details: [
-      {
-        icon: <PiPercentFill className="text-xl text-secondary" />,
-        title: 'Discount',
-        description: '> $100 Disc 10%',
-      },
-      {
-        icon: <FaCalendarAlt className="text-xl text-secondary" />,
-        title: 'Delivery Time',
-        description: '6 - 12 Working days',
-      },
-      {
-        icon: <BsBoxFill className="text-xl text-secondary" />,
-        title: 'Package',
-        description: 'Reagular Premium Box',
-      },
-      {
-        icon: <FaTruckFast className="text-xl text-secondary" />,
-        title: 'Estimated Arrival',
-        description: '10 - 12 October 23',
-      },
-    ],
   },
 ];
 
@@ -245,18 +121,6 @@ export const newsletter = {
   heading: "Don't wanna miss our offers?",
   description: 'Drop your email below and start receiving the best offers',
 };
-
-export const shoeSizes = [
-  'EU36',
-  'EU37',
-  'EU38',
-  'EU39',
-  'EU40',
-  'EU41',
-  'EU42',
-  'EU43',
-  'EU44',
-];
 
 export const note =
   ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae, est eum magnam doloremque, at adipisci debitis, similique dolores ipsa unde necessitatibus vero quibusdam nostrum numquam!';

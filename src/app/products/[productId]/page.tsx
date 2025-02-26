@@ -32,7 +32,7 @@ const SingleProductPage = async (props: Props) => {
           prevPrice={pathOr(0, ['previousPrice'], selectedProduct)}
           currentPrice={pathOr(0, ['currentPrice'], selectedProduct)}
           rating={pathOr(0, ['rating'], selectedProduct)}
-          pieces_sold={pathOr(0, ['pieces_sold'], selectedProduct)}
+          pieces_available={pathOr(0, ['pieces_available'], selectedProduct)}
           cartItem={selectedCartItem}
         />
       </div>
