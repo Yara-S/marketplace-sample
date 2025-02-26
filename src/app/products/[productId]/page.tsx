@@ -5,8 +5,6 @@ import React from 'react';
 import { shoes } from '@/data/content';
 import type { ProductType } from '@/data/types';
 
-import SectionMoreProducts from './SectionMoreProducts';
-import SectionNavigation from './SectionNavigation';
 import SectionProductHeader from './SectionProductHeader';
 import SectionProductInfo from './SectionProductInfo';
 
@@ -27,8 +25,6 @@ const SingleProductPage = async (props: Props) => {
 
   return (
     <div className="container">
-      <SectionNavigation />
-
       <div className="mb-20">
         <SectionProductHeader
           shots={pathOr([], ['shots'], selectedProduct)}
@@ -37,7 +33,6 @@ const SingleProductPage = async (props: Props) => {
           currentPrice={pathOr(0, ['currentPrice'], selectedProduct)}
           rating={pathOr(0, ['rating'], selectedProduct)}
           pieces_sold={pathOr(0, ['pieces_sold'], selectedProduct)}
-          reviews={pathOr(0, ['reviews'], selectedProduct)}
           cartItem={selectedCartItem}
         />
       </div>
@@ -46,13 +41,7 @@ const SingleProductPage = async (props: Props) => {
         <SectionProductInfo
           overview={pathOr('', ['overview'], selectedProduct)}
           shipment_details={pathOr([], ['shipment_details'], selectedProduct)}
-          ratings={pathOr(0, ['rating'], selectedProduct)}
-          reviews={pathOr(0, ['reviews'], selectedProduct)}
         />
-      </div>
-
-      <div className="mb-28">
-        <SectionMoreProducts />
       </div>
     </div>
   );

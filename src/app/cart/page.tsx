@@ -143,7 +143,7 @@ const CartPage = () => {
                   <span>${total}</span>
                 </div>
               </div>
-              <ButtonPrimary href="/checkout" className="mt-8 w-full">
+              <ButtonPrimary className="mt-8 w-full">
                 Checkout Now
               </ButtonPrimary>
             </div>

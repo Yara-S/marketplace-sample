@@ -1,10 +1,12 @@
 import React from 'react';
 
 import ProductCard from '@/components/ProductCard';
-import { productsSection, shoes } from '@/data/content';
+import { productsSection } from '@/data/content';
+import DataHandler from '@/data/handler';
 import Heading from '@/shared/Heading/Heading';
 
-const SectionProducts = () => {
+export default async function SectionProducts() {
+  const shoes = await DataHandler();
   return (
     <div className="container">
       <Heading isCenter isMain desc={productsSection.description}>
@@ -22,6 +24,6 @@ const SectionProducts = () => {
       </div>
     </div>
   );
-};
+}
 
-export default SectionProducts;
+// export default SectionProducts;

@@ -177,7 +177,6 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                       </p>
                       <div className="mt-5 flex items-center gap-5">
                         <ButtonPrimary
-                          href="/checkout"
                           onClick={handleCloseMenu}
                           className="w-full flex-1"
                         >

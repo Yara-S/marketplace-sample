@@ -43,12 +43,6 @@ export const topNavLinks: NavItemType[] = [
   },
 ];
 
-export const promotionTag = {
-  heading: 'DISC UP TO 50% FOR SNEAKERS FEST ID 2023',
-  description:
-    'Join the sneaker fest 2023 on 23 October. We have more fun gigs too and supported by FootWear!.',
-};
-
 export const shoes = [
   {
     slug: 'airForce1',

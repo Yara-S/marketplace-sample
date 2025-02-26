@@ -7,7 +7,6 @@ import React from 'react';
 import { BsBag } from 'react-icons/bs';
 import { GoDotFill } from 'react-icons/go';
 import { MdStar } from 'react-icons/md';
-import { PiSealCheckFill } from 'react-icons/pi';
 
 import ImageShowCase from '@/components/ImageShowCase';
 import type { ProductType } from '@/data/types';
@@ -25,7 +24,6 @@ interface SectionProductHeaderProps {
   currentPrice: number;
   rating: number;
   pieces_sold: number;
-  reviews: number;
   cartItem: ProductType;
 }
 
@@ -36,7 +34,6 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
   currentPrice,
   rating,
   pieces_sold,
-  reviews,
   cartItem,
 }) => {
   const cartContext = React.useContext(PageContext);
@@ -71,16 +68,11 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
                 className="size-full object-cover"
               />
             </ButtonCircle3>
-            <span className="font-medium">Nike</span>
-            <PiSealCheckFill className="text-blue-600" />
           </div>
           <GoDotFill className="mx-3 text-neutral-500" />
           <div className="flex items-center gap-1">
             <MdStar className="text-yellow-400" />
-            <p className="text-sm">
-              {rating}{' '}
-              <span className="text-neutral-500">{`(${reviews} Reviews)`}</span>
-            </p>
+            <p className="text-sm">{rating} </p>
           </div>
           <GoDotFill className="mx-3 text-neutral-500" />
           <p className="text-neutral-500">{`${pieces_sold} items sold`}</p>
