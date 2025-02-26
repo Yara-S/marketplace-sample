@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-param-reassign */
 
 'use client';
@@ -5,7 +6,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaBagShopping } from 'react-icons/fa6';
 import { MdClose, MdStar } from 'react-icons/md';
@@ -38,16 +39,31 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
   const handleOpenMenu = () => openBar();
   const handleCloseMenu = () => closeBar();
 
+  const [total, setTotal] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+
   const sumSubtotal = () => {
-    let total = 0;
+    let startTotal = 0;
+    let itemsTotal = 0;
     for (const item of cart) {
-      total += item.currentPrice;
+      if (item.count === undefined) {
+        item.count = 1;
+      }
+      itemsTotal += item.count;
+      startTotal += item.currentPrice * item.count;
     }
-    return total;
+    setTotal(startTotal);
+    setTotalItems(itemsTotal);
+    return startTotal;
   };
+
+  useEffect(() => {
+    setTotal(sumSubtotal());
+  }, [sumSubtotal]);
 
   const handleDeleteItem = (chosenItem: ProductType) => {
     deleteItemCart(chosenItem);
+    sumSubtotal();
   };
 
   const handleItemCountUpdate = (item: ProductType, value: any) => {
@@ -55,7 +71,7 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
     if (cart[loc] !== undefined) {
       cart[loc].count = value;
       setCart(cart);
-      console.log(cart);
+      sumSubtotal();
     }
   };
 
@@ -157,9 +173,7 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                             Shipping and taxes calculated at checkout.
                           </span>
                         </span>
-                        <span className="text-xl font-medium">
-                          ${sumSubtotal()}
-                        </span>
+                        <span className="text-xl font-medium">${total}</span>
                       </p>
                       <div className="mt-5 flex items-center gap-5">
                         <ButtonPrimary
@@ -208,7 +222,7 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
         className="mx-5 flex items-center gap-1 rounded-full bg-neutral-100 p-2 text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         <FaBagShopping className="text-2xl" />
-        <span className="hidden text-sm lg:block">{cart.length} items</span>
+        <span className="hidden text-sm lg:block">{totalItems} items</span>
       </button>
 
       {renderContent()}

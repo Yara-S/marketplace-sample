@@ -19,6 +19,8 @@ const emptyCart: ProductType[] = [];
 
 interface CartContextValue {
   addItemCart: (item: ProductType) => void;
+  cart: ProductType[];
+  setCart: React.Dispatch<React.SetStateAction<ProductType[]>>;
 }
 export const PageContext = React.createContext<CartContextValue | undefined>(
   undefined,
@@ -42,8 +44,16 @@ export default function RootLayout({
   };
 
   const addItemCart = (item: ProductType) => {
-    item.count = 1;
-    cart.push(item);
+    const selectedItemIndex = cart.indexOf(item);
+    if (selectedItemIndex === -1) {
+      item.count = 1;
+      cart.push(item);
+    } else {
+      if (cart[selectedItemIndex]?.count === undefined) {
+        throw new Error('No item count available');
+      }
+      cart[selectedItemIndex].count += 1;
+    }
     setCart(cart);
     openBar();
   };
@@ -51,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
-        <PageContext.Provider value={{ addItemCart }}>
+        <PageContext.Provider value={{ addItemCart, cart, setCart }}>
           <Header
             cart={cart}
             deleteItemCart={deleteItemCart}

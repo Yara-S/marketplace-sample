@@ -6,13 +6,10 @@ import type { FC } from 'react';
 import React from 'react';
 import { BsBag } from 'react-icons/bs';
 import { GoDotFill } from 'react-icons/go';
-import { LuInfo } from 'react-icons/lu';
 import { MdStar } from 'react-icons/md';
 import { PiSealCheckFill } from 'react-icons/pi';
 
 import ImageShowCase from '@/components/ImageShowCase';
-import ShoeSizeButton from '@/components/ShoeSizeButton';
-import { shoeSizes } from '@/data/content';
 import type { ProductType } from '@/data/types';
 import nike_profile from '@/images/nike_profile.jpg';
 import ButtonCircle3 from '@/shared/Button/ButtonCircle3';
@@ -92,19 +89,6 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({
         <div className="mb-5 space-y-1">
           <p className="text-neutral-500 line-through">${prevPrice}</p>
           <h1 className="text-3xl font-medium">${currentPrice}</h1>
-        </div>
-
-        <div className="mb-5 flex items-end justify-between">
-          <p className="text-xl">Available sizes</p>
-          <p className="flex items-center gap-1 text-sm text-neutral-500">
-            Size guide <LuInfo />
-          </p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3">
-          {shoeSizes.map((size) => (
-            <ShoeSizeButton key={size} size={size} />
-          ))}
         </div>
 
         <div className="mt-5 flex items-center gap-5">
